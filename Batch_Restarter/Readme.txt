@@ -1,4 +1,3 @@
-Extract the archive
 place pv.exe (Process Viewer) and Restarter.bat (The Script)
 in your core folder (where mangosd.exe and realmd.exe are)
 run the batch file and wait for the core to boot
