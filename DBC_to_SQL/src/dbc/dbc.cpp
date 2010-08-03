@@ -35,7 +35,9 @@ DBCFileLoader::~DBCFileLoader()
 
 bool DBCFileLoader::Load(char const *filename)
 {
-    FILE *pf = fopen(filename, "rb");
+    FILE *pf;
+	errno_t err;
+	err = fopen_s(&pf, filename, "rb");
     if(!pf)
         return false;
 

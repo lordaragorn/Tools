@@ -210,7 +210,9 @@ void dump_sql()
 {
     /********** START: Spell.dbc **********/
 
-    FILE *fSpellSql = fopen(SPELL_SQL, "w");
+    FILE *fSpellSql;
+	errno_t err;
+	err = fopen_s(&fSpellSql, SPELL_SQL, "w");
     if(!fSpellSql)
         return;
 
@@ -327,7 +329,9 @@ void dump_sql()
     
     /********** START: Item.dbc **********/
 
-    FILE *fItemSql = fopen(ITEM_SQL, "w");
+    FILE *fItemSql;
+	errno_t err2;
+	err2 = fopen_s(&fItemSql, ITEM_SQL, "w");
     if(!fItemSql)
         return;
 
