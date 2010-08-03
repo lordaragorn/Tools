@@ -21,7 +21,7 @@
 #ifndef __PROGRESSBAR_H__
 #define __PROGRESSBAR_H__
 
-#include "common/common.h"
+#include "common.h"
 
 class Bar
 {

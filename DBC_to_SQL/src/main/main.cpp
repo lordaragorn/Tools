@@ -21,14 +21,14 @@
 #include <iostream>
 #include <cstring>
 
-#include "common/common.h"
-#include "dbc/dbc.h"
-#include "structs/spell.h"
-#include "structs/item.h"
-#include "structs/achievement.h"
-#include "structs/achievement_category.h"
-#include "structs/achievement_criteria.h"
-#include "common/progressbar.h"
+#include "../common/common.h"
+#include "../dbc/dbc.h"
+#include "../structs/spell.h"
+#include "../structs/item.h"
+#include "../structs/achievement.h"
+#include "../structs/achievement_category.h"
+#include "../structs/achievement_criteria.h"
+#include "../common/progressbar.h"
 
 #define SQL_INSERTS_PER_QUERY   300
 

@@ -19,7 +19,7 @@
  */
 
 #include <cstdio>
-#include "dbc/dbc.h"
+#include "../dbc/dbc.h"
 
 DBCFileLoader::DBCFileLoader()
 {

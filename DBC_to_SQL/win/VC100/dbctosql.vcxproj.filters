@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8e46e22-4381-4efd-9d66-65851772b426}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\dbc">
+      <UniqueIdentifier>{21e72fe6-6575-4b49-b1a8-3a6e9a9160b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\dbc-structs">
+      <UniqueIdentifier>{157dad17-e2ef-455e-8bc5-31440070a07f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\main">
+      <UniqueIdentifier>{32b556c9-c0c2-41e7-a8d7-df940d51bd9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\common">
+      <UniqueIdentifier>{ba48532c-5e1a-41a8-a19a-5a8be81b6885}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\dbc\dbc.cpp">
+      <Filter>src\dbc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\main\main.cpp">
+      <Filter>src\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\src\common\progressbar.cpp">
+      <Filter>src\common</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\src\dbc\dbc.h">
+      <Filter>src\dbc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\structs\achievement.h">
+      <Filter>src\dbc-structs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\structs\achievement_category.h">
+      <Filter>src\dbc-structs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\structs\achievement_criteria.h">
+      <Filter>src\dbc-structs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\structs\item.h">
+      <Filter>src\dbc-structs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\structs\spell.h">
+      <Filter>src\dbc-structs</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\common\common.h">
+      <Filter>src\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\src\common\progressbar.h">
+      <Filter>src\common</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

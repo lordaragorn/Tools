@@ -210,6 +210,10 @@
 					RelativePath="..\..\src\structs\spell.h"
 					>
 				</File>
+				<File
+					RelativePath="..\..\src\structs\item.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="main"
