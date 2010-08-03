@@ -1,7 +1,6 @@
 /*
  * DBC to SQL Converter
  * Copyright (C) 2010  Darkrulerz
- * <http://code.google.com/p/dbctosql/>
 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +31,7 @@ char const *ITEM_TABLE = "item_template";
 // Item.dbc struct: MaNGOS 10120
 char const *item_translation[ITEM_DBC_COLUMN_NUMS][2] =
 {
-    {"uint32",   "entry"},                                             // 0
+    {"uint32",   "entry"},                                          // 0
     {"uint32",   "class"},                                          // 1
     {"uint32",   "subclass"},                                       // 2 some items have strange subclasses
     {"int32",    "unk0"},                                           // 3
