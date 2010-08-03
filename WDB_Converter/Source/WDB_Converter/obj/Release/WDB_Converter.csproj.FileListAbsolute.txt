@@ -1,0 +1,36 @@
+C:\WOW_Server\Armageddon\Armageddon WDB Converter\Source\WDB_Converter\bin\Release\definitions.xml
+C:\WOW_Server\Armageddon\Armageddon WDB Converter\Source\WDB_Converter\bin\Release\Armageddon WDB Converter.exe
+C:\WOW_Server\Armageddon\Armageddon WDB Converter\Source\WDB_Converter\bin\Release\Armageddon WDB Converter.pdb
+C:\WOW_Server\Armageddon\Armageddon WDB Converter\Source\WDB_Converter\obj\Release\ResolveAssemblyReference.cache
+C:\WOW_Server\Armageddon\Armageddon WDB Converter\Source\WDB_Converter\obj\Release\Armageddon WDB Converter.exe
+C:\WOW_Server\Armageddon\Armageddon WDB Converter\Source\WDB_Converter\obj\Release\Armageddon WDB Converter.pdb
+C:\Users\Singlem\Desktop\Source\WDB_Converter\obj\Release\Armageddon WDB Converter.exe
+C:\Users\Singlem\Desktop\Source\WDB_Converter\obj\Release\Armageddon WDB Converter.pdb
+C:\Users\Singlem\Desktop\Source\WDB_Converter\bin\Release\definitions.xml
+C:\Users\Singlem\Desktop\Source\WDB_Converter\bin\Release\Armageddon WDB Converter.exe
+C:\Users\Singlem\Desktop\Source\WDB_Converter\bin\Release\Armageddon WDB Converter.pdb
+C:\Users\Singlem\Desktop\Source\WDB_Converter\obj\Release\ResolveAssemblyReference.cache
+C:\Temp\WDB\Source\WDB_Converter\bin\Release\definitions.xml
+C:\Temp\WDB\Source\WDB_Converter\obj\Release\ResolveAssemblyReference.cache
+C:\Temp\WDB\Source\WDB_Converter\bin\Release\MaNGOS WDB Converter.exe
+C:\Temp\WDB\Source\WDB_Converter\bin\Release\MaNGOS WDB Converter.pdb
+C:\Temp\WDB\Source\WDB_Converter\obj\Release\MaNGOS WDB Converter.exe
+C:\Temp\WDB\Source\WDB_Converter\obj\Release\MaNGOS WDB Converter.pdb
+C:\Users\Singlem\Desktop\WDB\Source\WDB_Converter\obj\Release\MaNGOS WDB Converter.exe
+C:\Users\Singlem\Desktop\WDB\Source\WDB_Converter\obj\Release\MaNGOS WDB Converter.pdb
+C:\Users\Singlem\Desktop\WDB\Source\WDB_Converter\bin\Release\definitions.xml
+C:\Users\Singlem\Desktop\WDB\Source\WDB_Converter\bin\Release\MaNGOS WDB Converter.exe
+C:\Users\Singlem\Desktop\WDB\Source\WDB_Converter\bin\Release\MaNGOS WDB Converter.pdb
+C:\Users\Singlem\Desktop\WDB\Source\WDB_Converter\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Singlem\Desktop\WDB-Converter\Source\WDB_Converter\obj\Release\MaNGOS WDB Converter.exe
+C:\Users\Singlem\Desktop\WDB-Converter\Source\WDB_Converter\obj\Release\MaNGOS WDB Converter.pdb
+C:\Users\Singlem\Desktop\WDB-Converter\Source\WDB_Converter\bin\Release\definitions.xml
+C:\Users\Singlem\Desktop\WDB-Converter\Source\WDB_Converter\bin\Release\MaNGOS WDB Converter.exe
+C:\Users\Singlem\Desktop\WDB-Converter\Source\WDB_Converter\bin\Release\MaNGOS WDB Converter.pdb
+C:\Users\Singlem\Desktop\WDB-Converter\Source\WDB_Converter\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Singlem\Desktop\Database_compairer\WDB-Converter\Source\WDB_Converter\obj\Release\MaNGOS WDB Converter.exe
+C:\Users\Singlem\Desktop\Database_compairer\WDB-Converter\Source\WDB_Converter\obj\Release\MaNGOS WDB Converter.pdb
+C:\Users\Singlem\Desktop\Database_compairer\WDB-Converter\Source\WDB_Converter\bin\Release\definitions.xml
+C:\Users\Singlem\Desktop\Database_compairer\WDB-Converter\Source\WDB_Converter\bin\Release\MaNGOS WDB Converter.exe
+C:\Users\Singlem\Desktop\Database_compairer\WDB-Converter\Source\WDB_Converter\bin\Release\MaNGOS WDB Converter.pdb
+C:\Users\Singlem\Desktop\Database_compairer\WDB-Converter\Source\WDB_Converter\obj\Release\ResolveAssemblyReference.cache

@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+** This definition supports Mangos **
+
+** Supports 3.3.5a {Build "12340") **
+  Setting the part in between quotes after `build=` in <wdbDef build="**"> to <wdbDef build="0"> will make
+  the converter work for any WDB build, but it's not guaranteed to work right.
+
+-->
+
+<wdbDef build="12340" logging="false" query="3" AddFakesToUpdateQueries="false" MySQL_host="localhost" MySQL_username="root" MySQL_password="" MySQL_database="whydb_world">
+
+  <wdbId name="questcache" tablename="quest_template" querylimit="900">
+    <wdbElement name="entry" type="UInteger" output="true" key="true" />
+    <wdbElement type="UInteger" />
+    <wdbElement type="UInteger" />
+    <wdbElement name="Method" type="UInteger" />
+    <wdbElement name="questlevel" type="Integer" />
+    <wdbElement name="MinLevel" type="UInteger" />
+    <wdbElement name="ZoneOrSort" type="Integer" />
+    <wdbElement name="Type" type="UInteger" />
+    <wdbElement name="suggestedplayers" type="UInteger" />
+    <wdbElement name="RepObjectiveFaction" type="UInteger" />
+    <wdbElement name="RepObjectiveValue" type="Integer" />
+    <wdbElement type="UInteger" />
+    <wdbElement type="Integer" />
+    <wdbElement name="NextQuestID" type="UInteger" />
+    <wdbElement name="RewXPId" type="UInteger" />
+    <wdbElement name="RewOrReqMoney" type="Integer" />
+    <wdbElement name="RewMoneyMaxLevel" type="UInteger" />
+    <wdbElement name="RewSpell" type="UInteger" />
+    <wdbElement name="RewSpellCast" type="UInteger" />
+    <wdbElement name="RewHonorAddition" type="UInteger" />
+    <wdbElement name="RewHonorMultiplier" type="UInteger" />
+    <wdbElement name="srcItemId" type="UInteger" />
+    <wdbElement name="QuestFlags" type="UInteger" />
+    <wdbElement name="CharTitleId" type="UInteger" />
+    <wdbElement name="PlayersSlain" type="UInteger" />
+    <wdbElement name="BonusTalents" type="UInteger" />
+    <wdbElement type="Integer" />
+    <wdbElement type="Integer" />
+    <wdbElement name="RewItemId1" type="UInteger" /> 
+    <wdbElement name="RewItemCount1" type="Integer" />
+    <wdbElement name="RewItemId2" type="UInteger" />
+    <wdbElement name="RewItemCount2" type="Integer" />
+    <wdbElement name="RewItemId3" type="UInteger" />
+    <wdbElement name="RewItemCount3" type="Integer" />
+    <wdbElement name="RewItemId4" type="UInteger" />
+    <wdbElement name="RewItemCount4" type="Integer" />
+    <wdbElement name="RewChoiceItemId1" type="UInteger" />
+    <wdbElement name="RewChoiceItemCount1" type="Integer" />
+    <wdbElement name="RewChoiceItemId2" type="UInteger" />
+    <wdbElement name="RewChoiceItemCount2" type="Integer" />
+    <wdbElement name="RewChoiceItemId3" type="UInteger" />
+    <wdbElement name="RewChoiceItemCount3" type="Integer" />
+    <wdbElement name="RewChoiceItemId4" type="UInteger" />
+    <wdbElement name="RewChoiceItemCount4" type="Integer" />
+    <wdbElement name="RewChoiceItemId5" type="UInteger" />
+    <wdbElement name="RewChoiceItemCount5" type="Integer" />
+    <wdbElement name="RewChoiceItemId6" type="UInteger" />
+    <wdbElement name="RewChoiceItemCount6" type="Integer" />
+    <wdbElement name="RewRepFaction1" type="UInteger" />
+    <wdbElement name="RewRepFaction2" type="UInteger" />
+    <wdbElement name="RewRepFaction3" type="UInteger" />
+    <wdbElement name="RewRepFaction4" type="UInteger" />
+    <wdbElement name="RewRepFaction5" type="UInteger" />
+    <wdbElement name="RewRepValueId1" type="Integer" />
+    <wdbElement name="RewRepValueId2" type="Integer" />
+    <wdbElement name="RewRepValueId3" type="Integer" />
+    <wdbElement name="RewRepValueId4" type="Integer" />
+    <wdbElement name="RewRepValueId5" type="Integer" />
+    <wdbElement type="UInteger" />
+    <wdbElement type="UInteger" />
+    <wdbElement type="UInteger" />
+    <wdbElement type="UInteger" />
+    <wdbElement type="UInteger" />
+    <wdbElement name="PointMapId" type="UInteger" />
+    <wdbElement name="PointX" type="Float" />
+    <wdbElement name="PointY" type="Float" />
+    <wdbElement name="PointOpt" type="Integer" />
+    <wdbElement name="Title" type="String" output="true" />
+    <wdbElement name="Objectives" type="String" />
+    <wdbElement name="Details" type="String" />
+    <wdbElement name="EndText" type="String" />
+    <wdbElement name="CompletedText" type="String" />
+    <wdbElement name="ReqCreatureOrGOId1" type="Integer" />
+    <wdbElement name="ReqCreatureOrGOCount1" type="UInteger" />
+    <wdbElement type="UInteger" />
+    <wdbElement type="UInteger" />
+    <wdbElement name="ReqCreatureOrGOId2" type="Integer" />
+    <wdbElement name="ReqCreatureOrGOCount2" type="UInteger" />
+    <wdbElement type="UInteger" />
+    <wdbElement type="Integer" />
+    <wdbElement name="ReqCreatureOrGOId3" type="Integer" />
+    <wdbElement name="ReqCreatureOrGOCount3" type="UInteger" />
+    <wdbElement type="UInteger" />
+    <wdbElement type="Integer" />
+    <wdbElement name="ReqCreatureOrGOId4" type="Integer" />
+    <wdbElement name="ReqCreatureOrGOCount4" type="UInteger" />
+    <wdbElement type="UInteger" />
+    <wdbElement type="Integer" />
+    <wdbElement name="ReqItemId1" type="UInteger" />
+    <wdbElement name="ReqItemCount1" type="UInteger" />
+    <wdbElement name="ReqItemId2" type="UInteger" />
+    <wdbElement name="ReqItemCount2" type="UInteger" />
+    <wdbElement name="ReqItemId3" type="UInteger" />
+    <wdbElement name="ReqItemCount3" type="UInteger" />
+    <wdbElement name="ReqItemId4" type="UInteger" />
+    <wdbElement name="ReqItemCount4" type="UInteger" />
+    <wdbElement name="ReqItemId5" type="UInteger" />
+    <wdbElement name="ReqItemCount5" type="UInteger" />
+    <wdbElement name="ReqItemId6" type="UInteger" />
+    <wdbElement name="ReqItemCount6" type="UInteger" />
+    <wdbElement name="ObjectiveText1" type="String" />
+    <wdbElement name="ObjectiveText2" type="String" />
+    <wdbElement name="ObjectiveText3" type="String" />
+    <wdbElement name="ObjectiveText4" type="String" />
+  </wdbId>
+
+  <wdbId name="itemcache" tablename="item_template" querylimit="1500">
+    <wdbElement name="entry" type="UInteger" output="true" key="true" />
+    <wdbElement type="UInteger" />
+    <wdbElement name="class" type="UInteger" />
+    <wdbElement name="subclass" type="UInteger" />
+    <wdbElement name="unk0" type="Integer" />
+    <wdbElement name="name" type="String" output="true" />
+    <wdbElement type="String" />
+    <wdbElement type="String" />
+    <wdbElement type="String" />
+    <wdbElement name="displayid" type="UInteger" />
+    <wdbElement name="quality" type="UInteger" />
+    <wdbElement name="flags" type="UInteger" />
+    <wdbElement name="flags2" type="UInteger" />
+    <wdbElement name="Buyprice" type="UInteger" />
+    <wdbElement name="Sellprice" type="UInteger" />
+    <wdbElement name="Inventorytype" type="UInteger" />
+    <wdbElement name="Allowableclass" type="Integer" />
+    <wdbElement name="Allowablerace" type="Integer" />
+    <wdbElement name="Itemlevel" type="UInteger" />
+    <wdbElement name="requiredlevel" type="UInteger" />
+    <wdbElement name="RequiredSkill" type="UInteger" />
+    <wdbElement name="RequiredSkillRank" type="UInteger" />
+    <wdbElement name="RequiredSpell" type="UInteger" />
+    <wdbElement name="requiredhonorrank" type="UInteger" />
+    <wdbElement name="RequiredCityRank" type="UInteger" />
+    <wdbElement name="RequiredReputationFaction" type="UInteger" />
+    <wdbElement name="RequiredReputationRank" type="UInteger" />
+    <wdbElement name="maxcount" type="UInteger" />
+    <wdbElement name="stackable" type="Integer" />
+    <wdbElement name="ContainerSlots" type="UInteger" />
+    <wdbElement name="statscount" type="Count" beginfrom="1" maxcount="10" >
+      <countElement name="stat_type##" type="UInteger" default="0" />
+      <countElement name="stat_value##" type="Integer" default="0" />
+    </wdbElement>
+    <wdbElement name="ScalingStatDistribution" type="Integer" />
+    <wdbElement name="ScalingStatValue" type="UInteger" />
+    <wdbElement name="dmg_min1" type="Float" />
+    <wdbElement name="dmg_max1" type="Float" />
+    <wdbElement name="dmg_type1" type="UInteger" />
+    <wdbElement name="dmg_min2" type="Float" />
+    <wdbElement name="dmg_max2" type="Float" />
+    <wdbElement name="dmg_type2" type="UInteger" />
+    <wdbElement name="armor" type="UInteger" />
+    <wdbElement name="holy_res" type="UInteger" />
+    <wdbElement name="fire_res" type="UInteger" />
+    <wdbElement name="nature_res" type="UInteger" />
+    <wdbElement name="frost_res" type="UInteger" />
+    <wdbElement name="shadow_res" type="UInteger" />
+    <wdbElement name="arcane_res" type="UInteger" />
+    <wdbElement name="delay" type="UInteger" />
+    <wdbElement name="ammo_type" type="UInteger" />
+    <wdbElement name="RangedModRange" type="Float" />
+    <wdbElement name="spellid_1" type="Integer" />
+    <wdbElement name="spelltrigger_1" type="UInteger" />
+    <wdbElement name="spellcharges_1" type="Integer" />
+    <wdbElement name="spellcooldown_1" type="Integer" />
+    <wdbElement name="spellcategory_1" type="UInteger" />
+    <wdbElement name="spellcategorycooldown_1" type="Integer" />
+    <wdbElement name="spellid_2" type="Integer" />
+    <wdbElement name="spelltrigger_2" type="UInteger" />
+    <wdbElement name="spellcharges_2" type="Integer" />
+    <wdbElement name="spellcooldown_2" type="Integer" />
+    <wdbElement name="spellcategory_2" type="UInteger" />
+    <wdbElement name="spellcategorycooldown_2" type="Integer" />
+    <wdbElement name="spellid_3" type="Integer" />
+    <wdbElement name="spelltrigger_3" type="UInteger" />
+    <wdbElement name="spellcharges_3" type="Integer" />
+    <wdbElement name="spellcooldown_3" type="Integer" />
+    <wdbElement name="spellcategory_3" type="UInteger" />
+    <wdbElement name="spellcategorycooldown_3" type="Integer" />
+    <wdbElement name="spellid_4" type="Integer" />
+    <wdbElement name="spelltrigger_4" type="UInteger" />
+    <wdbElement name="spellcharges_4" type="Integer" />
+    <wdbElement name="spellcooldown_4" type="Integer" />
+    <wdbElement name="spellcategory_4" type="UInteger" />
+    <wdbElement name="spellcategorycooldown_4" type="Integer" />
+    <wdbElement name="spellid_5" type="Integer" />
+    <wdbElement name="spelltrigger_5" type="UInteger" />
+    <wdbElement name="spellcharges_5" type="Integer" />
+    <wdbElement name="spellcooldown_5" type="Integer" />
+    <wdbElement name="spellcategory_5" type="UInteger" />
+    <wdbElement name="spellcategorycooldown_5" type="Integer" />
+    <wdbElement name="bonding" type="UInteger" />
+    <wdbElement name="description" type="String" />
+    <wdbElement name="PageText" type="UInteger" />
+    <wdbElement name="LanguageID" type="UInteger" />
+    <wdbElement name="PageMaterial" type="UInteger" />
+    <wdbElement name="startquest" type="UInteger" />
+    <wdbElement name="lockid" type="UInteger" />
+    <wdbElement name="Material" type="Integer" />
+    <wdbElement name="sheath" type="UInteger" />
+    <wdbElement name="RandomProperty" type="Integer" />
+    <wdbElement name="RandomSuffix" type="UInteger" />
+    <wdbElement name="block" type="UInteger" />
+    <wdbElement name="itemset" type="UInteger" />
+    <wdbElement name="MaxDurability" type="UInteger" />
+    <wdbElement name="area" type="UInteger" />
+    <wdbElement name="Map" type="Integer" />
+    <wdbElement name="bagfamily" type="Integer" />
+    <wdbElement name="TotemCategory" type="Integer" />
+    <wdbElement name="socketColor_1" type="Integer" />
+    <wdbElement name="socketContent_1" type="Integer" />
+    <wdbElement name="socketColor_2" type="Integer" />
+    <wdbElement name="socketContent_2" type="Integer" />
+    <wdbElement name="socketColor_3" type="Integer" />
+    <wdbElement name="socketContent_3" type="Integer" />
+    <wdbElement name="socketBonus" type="Integer" />
+    <wdbElement name="GemProperties" type="Integer" />
+    <wdbElement name="RequiredDisenchantSkill" type="Integer" />
+    <wdbElement name="ArmorDamageModifier" type="Float" />
+    <wdbElement name="Duration" type="Integer" />
+    <wdbElement name="ItemLimitCategory" type="Integer" />
+    <wdbElement name="HolidayId" type="UInteger" />
+  </wdbId>
+
+  <wdbId name="creaturecache" tablename="creature_template" querylimit="1000">
+    <wdbElement name="entry" type="UInteger" output="true" key="true" />
+    <wdbElement type="UInteger" />
+    <wdbElement name="name" type="String" output="true" />
+    <wdbElement type="String" />
+    <wdbElement type="String" />
+    <wdbElement type="String" />
+    <wdbElement name="subname" type="String" />
+    <wdbElement name="IconName" type="String" />
+    <wdbElement name="type_flags" type="UInteger" />
+    <wdbElement name="type" type="UInteger" />
+    <wdbElement name="family" type="Integer" />
+    <wdbElement name="rank" type="UInteger" />
+    <wdbElement name="killcredit1" type="UInteger" />
+    <wdbElement name="killcredit2" type="UInteger" />
+    <wdbElement name="modelid_A" type="UInteger" />
+    <wdbElement name="modelid_H" type="UInteger" />
+    <wdbElement name="modelid_A2" type="UInteger" />
+    <wdbElement name="modelid_H2" type="UInteger" />
+    <wdbElement name="unk16" type="Float" />
+    <wdbElement name="unk17" type="Float" />
+    <wdbElement name="RacialLeader" type="TinyInt" />
+    <wdbElement name="questitem1" type="UInteger" />
+    <wdbElement name="questitem2" type="UInteger" />
+    <wdbElement name="questitem3" type="UInteger" />
+    <wdbElement name="questitem4" type="UInteger" />
+    <wdbElement name="questitem5" type="UInteger" />
+    <wdbElement name="questitem6" type="UInteger" />
+    <wdbElement name="MovementId" type="UInteger" />
+  </wdbId>
+
+  <wdbId name="gameobjectcache" tablename="gameobject_template" querylimit="15000">
+    <wdbElement name="entry" type="UInteger" output="true" key="true" />
+    <wdbElement type="UInteger" />
+    <wdbElement name="Type" type="UInteger" />
+    <wdbElement name="DisplayID" type="UInteger" />
+    <wdbElement name="Name" type="String" output="true" />
+    <wdbElement type="String" />
+    <wdbElement type="String" />
+    <wdbElement type="String" />
+    <wdbElement name="IconName" type="String" />
+    <wdbElement name="CastBarCaption" type="String" />
+    <wdbElement name="Unk1" type="String" />
+    <wdbElement name="data0" type="UInteger" />
+    <wdbElement name="data1" type="UInteger" />
+    <wdbElement name="data2" type="UInteger" />
+    <wdbElement name="data3" type="UInteger" />
+    <wdbElement name="data4" type="UInteger" />
+    <wdbElement name="data5" type="UInteger" />
+    <wdbElement name="data6" type="UInteger" />
+    <wdbElement name="data7" type="UInteger" />
+    <wdbElement name="data8" type="UInteger" />
+    <wdbElement name="data9" type="UInteger" />
+    <wdbElement name="data10" type="UInteger" />
+    <wdbElement name="data11" type="UInteger" />
+    <wdbElement name="data12" type="UInteger" />
+    <wdbElement name="data13" type="UInteger" />
+    <wdbElement name="data14" type="UInteger" />
+    <wdbElement name="data15" type="UInteger" />
+    <wdbElement name="data16" type="UInteger" />
+    <wdbElement name="data17" type="UInteger" />
+    <wdbElement name="data18" type="UInteger" />
+    <wdbElement name="data19" type="UInteger" />
+    <wdbElement name="data20" type="UInteger" />
+    <wdbElement name="data21" type="UInteger" />
+    <wdbElement name="data22" type="UInteger" />
+    <wdbElement name="data23" type="UInteger" />
+    <wdbElement name="Size" type="Float" />
+    <wdbElement name="QuestItem1" type="UInteger" />
+    <wdbElement name="QuestItem2" type="UInteger" />
+    <wdbElement name="QuestItem3" type="UInteger" />
+    <wdbElement name="QuestItem4" type="UInteger" />
+    <wdbElement name="QuestItem5" type="UInteger" />
+    <wdbElement name="QuestItem6" type="UInteger" />
+  </wdbId>
+
+  <wdbId name="npccache" tablename="npc_text" querylimit="1300">
+    <wdbElement name="ID" type="UInteger" output="true" key="true" />
+    <wdbElement type="UInteger" />
+    <wdbElement name="prob0" type="Float" />
+    <wdbElement name="text0_0" type="String" />
+    <wdbElement name="text0_1" type="String" />
+    <wdbElement name="lang0" type="UInteger" />
+    <wdbElement name="em0_0" type="UInteger" />
+    <wdbElement name="em0_1" type="UInteger" />
+    <wdbElement name="em0_2" type="UInteger" />
+    <wdbElement name="em0_3" type="UInteger" />
+    <wdbElement name="em0_4" type="UInteger" />
+    <wdbElement name="em0_5" type="UInteger" />
+    <wdbElement name="prob1" type="Float" />
+    <wdbElement name="text1_0" type="String" />
+    <wdbElement name="text1_1" type="String" />
+    <wdbElement name="lang1" type="UInteger" />
+    <wdbElement name="em1_0" type="UInteger" />
+    <wdbElement name="em1_1" type="UInteger" />
+    <wdbElement name="em1_2" type="UInteger" />
+    <wdbElement name="em1_3" type="UInteger" />
+    <wdbElement name="em1_4" type="UInteger" />
+    <wdbElement name="em1_5" type="UInteger" />
+    <wdbElement name="prob2" type="Float" />
+    <wdbElement name="text2_0" type="String" />
+    <wdbElement name="text2_1" type="String" />
+    <wdbElement name="lang2" type="UInteger" />
+    <wdbElement name="em2_0" type="UInteger" />
+    <wdbElement name="em2_1" type="UInteger" />
+    <wdbElement name="em2_2" type="UInteger" />
+    <wdbElement name="em2_3" type="UInteger" />
+    <wdbElement name="em2_4" type="UInteger" />
+    <wdbElement name="em2_5" type="UInteger" />
+    <wdbElement name="prob3" type="Float" />
+    <wdbElement name="text3_0" type="String" />
+    <wdbElement name="text3_1" type="String" />
+    <wdbElement name="lang3" type="UInteger" />
+    <wdbElement name="em3_0" type="UInteger" />
+    <wdbElement name="em3_1" type="UInteger" />
+    <wdbElement name="em3_2" type="UInteger" />
+    <wdbElement name="em3_3" type="UInteger" />
+    <wdbElement name="em3_4" type="UInteger" />
+    <wdbElement name="em3_5" type="UInteger" />
+    <wdbElement name="prob4" type="Float" />
+    <wdbElement name="text4_0" type="String" />
+    <wdbElement name="text4_1" type="String" />
+    <wdbElement name="lang4" type="UInteger" />
+    <wdbElement name="em4_0" type="UInteger" />
+    <wdbElement name="em4_1" type="UInteger" />
+    <wdbElement name="em4_2" type="UInteger" />
+    <wdbElement name="em4_3" type="UInteger" />
+    <wdbElement name="em4_4" type="UInteger" />
+    <wdbElement name="em4_5" type="UInteger" />
+    <wdbElement name="prob5" type="Float" />
+    <wdbElement name="text5_0" type="String" />
+    <wdbElement name="text5_1" type="String" />
+    <wdbElement name="lang5" type="UInteger" />
+    <wdbElement name="em5_0" type="UInteger" />
+    <wdbElement name="em5_1" type="UInteger" />
+    <wdbElement name="em5_2" type="UInteger" />
+    <wdbElement name="em5_3" type="UInteger" />
+    <wdbElement name="em5_4" type="UInteger" />
+    <wdbElement name="em5_5" type="UInteger" />
+    <wdbElement name="prob6" type="Float" />
+    <wdbElement name="text6_0" type="String" />
+    <wdbElement name="text6_1" type="String" />
+    <wdbElement name="lang6" type="UInteger" />
+    <wdbElement name="em6_0" type="UInteger" />
+    <wdbElement name="em6_1" type="UInteger" />
+    <wdbElement name="em6_2" type="UInteger" />
+    <wdbElement name="em6_3" type="UInteger" />
+    <wdbElement name="em6_4" type="UInteger" />
+    <wdbElement name="em6_5" type="UInteger" />
+    <wdbElement name="prob7" type="Float" />
+    <wdbElement name="text7_0" type="String" />
+    <wdbElement name="text7_1" type="String" />
+    <wdbElement name="lang7" type="UInteger" />
+    <wdbElement name="em7_0" type="UInteger" />
+    <wdbElement name="em7_1" type="UInteger" />
+    <wdbElement name="em7_2" type="UInteger" />
+    <wdbElement name="em7_3" type="UInteger" />
+    <wdbElement name="em7_4" type="UInteger" />
+    <wdbElement name="em7_5" type="UInteger" />
+  </wdbId>
+
+  <wdbId name="pagetextcache" tablename="page_text" querylimit="1500">
+    <wdbElement name="entry" type="UInteger" output="true" key="true" />
+    <wdbElement type="UInteger" />
+    <wdbElement name="text" type="String" />
+    <wdbElement name="next_page" type="UInteger" />
+  </wdbId>
+
+  <!--
+  <wdbId name="itemnamecache" tablename="itemnames">
+    <wdbElement name="entry" type="UInteger" output="true" key="true" />
+    <wdbElement type="UInteger" />
+    <wdbElement name="name" type="String" output="true" />
+    <wdbElement name="slotid" type="UInteger" />
+  </wdbId>-->
+
+  <!-- Not arcemu related -->
+  <wdbId name="itemtextcache" tablename="itemtextcache">
+    <wdbElement name="Id" type="UInteger" output="true" key="true" />
+    <wdbElement type="UInteger" />
+    <wdbElement name="Text" type="String" />
+  </wdbId>
+
+</wdbDef>
