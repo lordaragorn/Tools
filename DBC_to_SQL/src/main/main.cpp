@@ -272,7 +272,7 @@ void dump_sql()
             fprintf(fSpellSql, "(");
         }
         else
-            fprintf(fSpellSql, ",(");
+            fprintf(fSpellSql, "(");
 
         for(uint16 i = 0; i < SPELL_DBC_COLUMN_NUMS; i++)
         {
@@ -311,7 +311,7 @@ void dump_sql()
         else if(j == DBCSpell.getNumRows() - 1)
             fprintf(fSpellSql, ");\n");
         else
-            fprintf(fSpellSql, ")\n");
+            fprintf(fSpellSql, "),\n");
 
         ProgressSpell.Step();
     }
@@ -391,7 +391,7 @@ void dump_sql()
             fprintf(fItemSql, "(");
         }
         else
-            fprintf(fItemSql, ",(");
+            fprintf(fItemSql, "(");
 
         for(uint16 i = 0; i < ITEM_DBC_COLUMN_NUMS; i++)
         {
@@ -430,7 +430,7 @@ void dump_sql()
         else if(j == DBCItem.getNumRows() - 1)
             fprintf(fItemSql, ");\n");
         else
-            fprintf(fItemSql, ")\n");
+            fprintf(fItemSql, "),\n");
 
         ProgressItem.Step();
     }
