@@ -1,7 +1,7 @@
 <?php
 ob_start();
-include "functions.php"
-$settingsfile = "http://" . $_SERVER['HTTP_HOST'] . "/config.php";
+include "functions.php";
+$settingsfile = "config.php";
 $reading = @fopen($settingsfile, 'r');
 if ($reading)
 {
@@ -15,7 +15,7 @@ if ($reading)
         <body>
         <br><br>
         <center>
-        This is a test interface for the Auto-Compiler.<br>
+        This is a test interface for the SQL-Importer.<br>
         This will allow you to update your database using a more sophisticated way than the batch part.<br><br>
         <form name="database" action="<?php echo $PHP_SELF; ?>" method="POST">
         Update existing database now! <input type="submit" name="database" value="Update"><br>

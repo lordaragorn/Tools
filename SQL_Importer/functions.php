@@ -1,7 +1,7 @@
 <?php
 function ImportDB()
 {
-    $reading = @fopen("config.php", 'r');
+    $reading = fopen("config.php", 'r');
     if ($reading)
         require "config.php";
     else
@@ -129,10 +129,11 @@ function num_files($directory='.')
 }
 function WriteVars()
 {
+    echo "getting here";
     $Pattern = '/\s*/m';
     $Replace = '';
     $settingsfile = "config.php";
-    $reading = @fopen($settingsfile, 'r');
+    $reading = fopen($settingsfile, 'r');
     if ($reading)
         require "config.php";
     if ($_POST["host"] != "" && $host == "")
@@ -292,25 +293,25 @@ function WriteVars()
     $reading = @fopen($settingsfile, 'r');
     if (!$reading)
         die ("Unexpected error during writing of the config file.");
-    header("Location: Auto-Compiler.php");
+    header("Location: index.php");
     ob_end_clean;
     exit;
 }
 function ShowForm()
 {
-    $settingsfile = "http://" . $_SERVER['HTTP_HOST'] . "/test/config.php";
+    $settingsfile = "config.php";
     $reading = @fopen($settingsfile, 'r');
     if ($reading)
         require "config.php";
-    echo "<center>This will save your settings to a file for later usage.</center>";
+    echo "<center>This will save your settings to a file for later usage.</center><br>";
     if ($errors != 0)
     {
         if ($errors == 8)
-            echo "<center>You didn't fill in anything the last time.</center>";
+            echo "<center>You didn't fill in anything the last time.</center><br>";
         else if ($errors >= 2)
-            echo "<center>You forgot to fill in a couple of fields.</center>";
+            echo "<center>You forgot to fill in a couple of fields.</center><br>";
         else
-            echo "<center>You forgot to fill in one of the fields.</center>";
+            echo "<center>You forgot to fill in one of the fields.</center><br>";
     }
     ?>
     <html>
@@ -318,7 +319,7 @@ function ShowForm()
     <center><br>
     <form name="input" action="<?php echo $PHP_SELF; ?>" method="post">
     <?php
-    if ($set_host == "")
+    if ($host == "")
     {?>
         Host address: <input type="text" name="host" value="localhost"><br>
     <?php
