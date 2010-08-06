@@ -32,45 +32,101 @@ if ($link)
     else
     {
         if ($realmddb == "")
-            echo "The config for the realm database is empty.";
+            die("The config for the realm database is empty.");
         else
-            die ("Error encountered: Tried opening realm database: <b>`$realmddb`</b> in ".__FILE__." on line: ".__LINE__."<br>".mysql_error());
-        exit();
+        {
+            $create_db = mysql_query("CREATE DATABASE IF NOT EXISTS $realmddb DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
+            if (!$create_db)
+                echo "Failed to create database " . $realmddb . " because of:<br>" . mysql_error($link) . ".\n<br><br><br>";
+        }
     }
     if ($connect_worlddb)
         $can_import = $can_import + 1;
     else
     {
         if ($worlddb == "")
-            echo "The config for the world database is empty.";
+            die("The config for the world database is empty.");
         else
-            die ("Error encountered: Tried opening world database: <b>`$worlddb`</b> in ".__FILE__." on line: ".__LINE__."<br>".mysql_error());
-        exit();
+        {
+            $create_db = mysql_query("CREATE DATABASE IF NOT EXISTS $worlddb DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
+            if (!$create_db)
+                echo "Failed to create database " . $realmddb . " because of:<br>" . mysql_error($link) . ".\n<br><br><br>";
+        }
     }
     if ($connect_scriptdev2db)
         $can_import = $can_import + 1;
     else
     {
         if ($scriptdev2db == "")
-            echo "The config for the scriptdev2 database is empty.";
+            die("The config for the scriptdev2 database is empty.");
         else
-            die ("Error encountered: Tried opening scriptdev2 database: <b>`$scriptdev2db`</b> in ".__FILE__." on line: ".__LINE__."<br>".mysql_error());
-        exit();
+        {
+            $create_db = mysql_query("CREATE DATABASE IF NOT EXISTS $scriptdev2db DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
+            if (!$create_db)
+                echo "Failed to create database " . $realmddb . " because of:<br>" . mysql_error($link) . ".\n<br><br><br>";
+        }
     }
     if ($connect_charactersdb)
         $can_import = $can_import + 1;
     else
     {
         if ($charactersdb == "")
-            echo "The config for the characters database is empty.";
+            die("The config for the characters database is empty.");
         else
-            die ("Error encountered: Tried opening characters database: <b>`$charactersdb`</b> in ".__FILE__." on line: ".__LINE__."<br>".mysql_error());
-        exit();
+        {
+            $create_db = mysql_query("CREATE DATABASE IF NOT EXISTS $charactersdb DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
+            if (!$create_db)
+                echo "Failed to create database " . $realmddb . " because of:<br>" . mysql_error($link) . ".\n<br><br><br>";
+        }
     }
     if ($can_import == 4)
-        ImportDB();
+    {
+        $dir1 = "D:/Users/Dark/Desktop/Batch/Database/Full Database";
+        $dir2 = "D:/Users/Dark/Desktop/Batch/Core/sql/updates";
+        $dir3 = "D:/Users/Dark/Desktop/Batch/Database/Updates/335/Update_Packs/ScriptDev2";
+        $dir4 = "D:/Users/Dark/Desktop/Batch/Database/Updates/335/Update_Packs/MaNGOS";
+        $dir5 = "D:/Users/Dark/Desktop/Batch/Database/Updates/335/Update_Packs/Characters";
+        $dir6 = "D:/Users/Dark/Desktop/Batch/Database/Updates/335/SQLs_for_Next_Update_Pack/Characters";
+        $dir7 = "D:/Users/Dark/Desktop/Batch/Database/Updates/335/SQLs_for_Next_Update_Pack/ScriptDev2";
+        $dir8 = "D:/Users/Dark/Desktop/Batch/Database/Updates/335/SQLs_for_Next_Update_Pack/MaNGOS";
+        $dir9 = "D:/Users/Dark/Desktop/Batch/Database/Updates/335/SQLs_for_Next_Update_Pack/Realmd";
+        if (!num_files($dir1) == 0)
+            $file_count = num_files($dir1);
+        if (!num_files($dir2) == 0)
+            $file_count = $file_count + num_files($dir2);
+        if (!num_files($dir3) == 0)
+            $file_count = $file_count + num_files($dir3);
+        if (!num_files($dir4) == 0)
+            $file_count = $file_count + num_files($dir4);
+        if (!num_files($dir5) == 0)
+            $file_count = $file_count + num_files($dir5);
+        if (!num_files($dir6) == 0)
+            $file_count = $file_count + num_files($dir6);
+        if (!num_files($dir7) == 0)
+            $file_count = $file_count + num_files($dir7);
+        if (!num_files($dir8) == 0)
+            $file_count = $file_count + num_files($dir8);
+        if (!num_files($dir9) == 0)
+            $file_count = $file_count + num_files($dir9);
+        if ($file_count == 0)
+            die("No SQL files found in directory: \"" . $dir . "\"<br>please check if the directory is correctly pointing to the SQL files you wish to import.");
+        else
+        {
+            ImportDB($dir1);
+            /*ImportDB($dir2);
+            ImportDB($dir3);
+            ImportDB($dir4);
+            ImportDB($dir5);
+            ImportDB($dir6);
+            ImportDB($dir7);
+            ImportDB($dir8);
+            ImportDB($dir9);*/
+        }
+    }
     else
-        die("Importing will not continue untill the above issue is solved.");
+    {
+        header("Location: clean.php");
+    }
 }
 else
 {

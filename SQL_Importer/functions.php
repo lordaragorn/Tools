@@ -1,20 +1,19 @@
 <?php
-function ImportDB()
+function ImportDB($dir)
 {
+    ini_set("memory_limit","750M");
+    global $file_count;
+    global $multi_query;
     $reading = fopen("config.php", 'r');
     if ($reading)
         require "config.php";
     else
         die("Config file not present.");
-    $link = mysql_connect($host, $name, $pass);
-    $dir = ".";
-    $file_count = num_files($dir);
-    if ($file_count == 0)
-        die("No SQL files found in directory: \"" . $dir . "\"<br>please check if the directory is correctly pointing to the SQL files you wish to import.");
     $files = preg_find('/\.sql$/D', $dir, PREG_FIND_RECURSIVE);
     $counter = 0;
     foreach($files as $file)
     {
+        $can_echo = 1;
         $counter = $counter + 1;
         $percentage = round($counter / $file_count * 100);
         if ($percentage == 100)
@@ -24,36 +23,42 @@ function ImportDB()
         echo "<hr><div align=center><b><font color=" . $color . ">";
         echo $percentage . "%";
         echo "</b></font></div>";
-        if (preg_match("*_mangos_*", $file))
+        if (preg_match("*mangos*", $file) || preg_match("*SQLs_for_Next_Update_Pack/MaNGOS*", $dir) || preg_match("*Update_Packs/MaNGOS*", $dir))
             $targetdb = $worlddb;
-        else if (preg_match("*_characters_*", $file))
+        else if (preg_match("*_characters_*", $file) || preg_match("*Characters Database*", $file) || preg_match("*SQLs_for_Next_Update_Pack/Characters*", $dir) || preg_match("*Update_Packs/Characters*", $dir))
             $targetdb = $charactersdb;
-        else if (preg_match("*_realmd_*", $file))
+        else if (preg_match("*_realmd_*", $file) || preg_match("*Realm Database*", $file) || preg_match("*SQLs_for_Next_Update_Pack/Realmd*", $dir) || preg_match("*Update_Packs/Realmd*", $dir))
             $targetdb = $realmddb;
+        else if (preg_match("*_scriptdev2*", $file) || preg_match("*ScriptDev2 Database*", $file) || preg_match("*SQLs_for_Next_Update_Pack/ScriptDev2*", $dir) || preg_match("*Update_Packs/ScriptDev2*", $dir))
+            $targetdb = $scriptdev2db;
+        else if (preg_match("*Database Creation*", $file))
+            $targetdb = "mysql";
         else
             die("<hr><br>Unknown file " . $file);
-        echo "<hr><br>File " . $file . ' containing query(s):<br><br> was imported at ' . $targetdb . "<br><br>";
+        echo "<hr><br>File " . $file . ' containing query(s):<br><br>';
         $file_content = file($file);
         foreach($file_content as $sql_line)
         {
             if(trim($sql_line) != "" && strpos($sql_line, "--") === false)
             {
-                echo $sql_line . '<br>';
-                echo "<br>";
-                $connect = mysql_select_db($targetdb);
-                $output = mysql_query($sql_line);
-                if ($output)
-                {
-                    $result = mysql_result($output, 0);
-                    if ($result)
-                        echo "Result = " . $result . "<br><br>";
-                }
-                else
-                    echo "Failed to import because of: " . mysql_error($link) . ".\n<br><br><br>";
+                $multi_query .= $sql_line;
             }
-            else
-                die("SQL file is empty or in a wrong format");
         }
+        $multi_link = mysqli_connect($host, $name, $pass, $targetdb);
+        if ($multi_link)
+        {
+            $multi_result = mysqli_multi_query($multi_link, $multi_query);
+            if ($multi_result)
+                echo "succes";
+            else
+                printf("Error: %d\n", mysqli_error($multi_link));
+        }
+        else
+            printf("Connect failed: %s\n", mysqli_connect_error());
+        if (preg_match("*mangos*", $file))
+            echo $multi_query;
+        $multi_query = "";
+        mysqli_close($multi_link);
     }
 }
 Function preg_find($pattern, $start_dir='.', $args=NULL)
@@ -295,7 +300,8 @@ function WriteVars()
     $reading = @fopen($settingsfile, 'r');
     if (!$reading)
         die ("Unexpected error during writing of the config file.");
-    header("Location: index.php");
+    else
+        header("Location: index.php");
     ob_end_clean;
     exit;
 }
