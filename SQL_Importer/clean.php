@@ -14,7 +14,7 @@ define('PREG_FIND_SORTDISKUSAGE', 2048);
 define('PREG_FIND_SORTEXTENSION', 4096);
 define('PREG_FIND_FOLLOWSYMLINKS', 8192);
 include "functions.php";
-$reading = @fopen("config.php", 'r');
+$reading = fopen("config.php", 'r');
 if ($reading)
     require "config.php";
 else

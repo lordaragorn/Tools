@@ -9,12 +9,14 @@ function ImportDB()
     $link = mysql_connect($host, $name, $pass);
     $dir = ".";
     $file_count = num_files($dir);
+    if ($file_count == 0)
+        die("No SQL files found in directory: \"" . $dir . "\"<br>please check if the directory is correctly pointing to the SQL files you wish to import.");
     $files = preg_find('/\.sql$/D', $dir, PREG_FIND_RECURSIVE);
-    $teller = 0;
+    $counter = 0;
     foreach($files as $file)
     {
-        $teller = $teller + 1;
-        $percentage = round($teller / $file_count * 100);
+        $counter = $counter + 1;
+        $percentage = round($counter / $file_count * 100);
         if ($percentage == 100)
             $color = "#43CF24";
         else
@@ -313,6 +315,8 @@ function ShowForm()
         else
             echo "<center>You forgot to fill in one of the fields.</center><br>";
     }
+    else
+        header("Location: index.php");
     ?>
     <html>
     <body>
