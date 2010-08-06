@@ -1,5 +1,73 @@
 <?php
 ob_start();
+$settingsfile = "http://" . $_SERVER['HTTP_HOST'] . "/test/config.php";
+$reading = @fopen($settingsfile, 'r');
+if ($reading)
+{
+    require "config.php";
+    if ($host == "" || $port == "" || $name == "" || $pass == "" || $worlddb == "" || $realmddb == "" || $scriptdev2db == "" || $charactersdb == "" || $errors != 0)
+        ShowForm();
+    else
+    {
+        ?>
+        <html>
+        <body>
+        <br><br>
+        <center>
+        This is a test interface for the Auto-Compiler.<br>
+        This will allow you to update your database using a more sophisticated way than the batch part.<br><br>
+        <form name="database" action="<?php echo $PHP_SELF; ?>" method="POST">
+        Update existing database now! <input type="submit" name="database" value="Update"><br>
+        Create a clean database now! <input type="submit" name="database" value="New"><br>
+        </form>
+        </center>
+        <?php
+        $host = $host . ":" . $port;
+        $link = mysql_connect($host, $name, $pass);
+        if ($link)
+        {
+            $database_connect = mysql_select_db($worlddb, $link);
+            if ($database_connect)
+            {
+                echo "<br><br><center>Connection to the database ('$worlddb') is succesfully established, above buttons will now function.</center>";
+                if (isset($_POST['database']))
+                {
+                    if ($_POST['database'] == "New")
+                    {
+                        $time1 = time();
+                        $time2 = time();
+                        while ($time2 - $time1 <= 15)
+                        {
+                            echo "This is irreversible, everything will be erased<br>";
+                            echo "if you still want to cancel, you have 15 seconds to press the back button!<br>";
+                            $time2 = time();
+                        }
+                        if ($time2 - $time1 >= 15)
+                            header("Location: clean.php");
+                    }
+                    else
+                    {
+                        header("Location: update.php");
+                    }
+                }
+            }
+            else
+            {
+                die ("Error encountered: Tried opening world database: <b>`$worlddb`</b> in ".__FILE__." on line: ".__LINE__."<br>".mysql_error());
+                exit();
+            }
+        }
+        else
+        {
+            echo "Database connection could not be established, please check your configs";
+            exit();
+        }
+    }
+}
+else
+{
+    ShowForm();
+}
 function WriteVars()
 {
     $Pattern = '/\s*/m';
@@ -169,144 +237,26 @@ function WriteVars()
     ob_end_clean;
     exit;
 }
-$settingsfile = "http://" . $_SERVER['HTTP_HOST'] . "/test/config.php";
-$reading = @fopen($settingsfile, 'r');
-if ($reading)
+function ShowForm()
 {
-    require "config.php";
-    if ($host == "" || $port == "" || $name == "" || $pass == "" || $worlddb == "" || $realmddb == "" || $scriptdev2db == "" || $charactersdb == "" || $errors != 0)
-    {
-        if ($errors != 0)
-        {
-            if ($errors == 8)
-                echo "<center>You didn't fill in anything the last time.</center>";
-            else if ($errors >= 2)
-                echo "<center>You forgot to fill in a couple of fields.</center>";
-            else
-                echo "<center>You forgot to fill in one of the fields.</center>";
-        }
-        ?>
-        <html>
-        <body>
-        <center><br>
-        <form name="input" action="<?php echo $PHP_SELF; ?>" method="post">
-        <?php
-        if ($set_host == "")
-        {?>
-            Host address: <input type="text" name="host" value="localhost"><br>
-        <?php
-        }
-        if ($port == "")
-        {?>
-            Mysql Port: <input type="text" name="port" value="3306"><br>
-        <?php
-        }
-        if ($name == "")
-        {?>
-            Mysql Username: <input type="text" name="name" value="root"><br>
-        <?php
-        }
-        if ($pass == "")
-        {?>
-            Mysql Password: <input type="text" name="pass" value="mangos"><br>
-        <?php
-        }
-        if ($worlddb == "")
-        {?>
-            World Database name: <input type="text" name="worlddb" value="mangos"><br>
-        <?php
-        }
-        if ($charactersdb == "")
-        {?>
-             Characters Database name: <input type="text" name="charactersdb" value="characters"><br>
-        <?php
-        }
-        if ($scriptdev2db == "")
-        {?>
-            ScriptDev2 Database name: <input type="text" name="scriptdev2db" value="scriptdev2"><br>
-        <?php
-        }
-        if ($realmddb == "")
-        {?>
-             Realm Database name: <input type="text" name="realmddb" value="realmd"><br>
-        <?php
-        }?>
-        <input type="hidden" name="submitted" value="1"><br>
-        <input type="submit" value="Save" />
-        </form>
-        </center>
-        </body>
-        </html>
-        <?php
-        if ($_REQUEST['submitted'] == 1)
-            WriteVars();
-    }
-    else
-    {
-        ?>
-        <html>
-        <body>
-        <br><br>
-        <center>
-        This is a test interface for the Auto-Compiler.<br>
-        This will allow you to update your database using a more sophisticated way than the batch part.<br><br>
-        <form name="database" action="<?php echo $PHP_SELF; ?>" method="POST">
-        Update existing database now! <input type="submit" name="database" value="Update"><br>
-        Create a clean database now! <input type="submit" name="database" value="New"><br>
-        </form>
-        </center>
-        </body>
-        </html>
-        <?php
-        $host = $host . ":" . $port;
-        $link = mysql_connect($host, $name, $pass);
-        if ($link)
-        {
-            $database_connect = mysql_select_db($worlddb, $link);
-            if ($database_connect)
-            {
-                echo "<br><br><center>Connection to the database ('$worlddb') is succesfully established, above buttons will now function.</center>";
-                if (isset($_POST['database']))
-                {
-                    if ($_POST['database'] == "New")
-                    {
-                        ?>
-                        <form name="sure" action="<?php echo $PHP_SELF; ?>" method="POST">
-                        Are you sure?<br>
-                        <input type="submit" name="sure" value="Yes"><br>
-                        <input type="submit" name="sure" value="No"><br>
-                        <?php
-                        if ($_POST['sure'] == "No")
-                            return;
-                        else
-                            header("Location: clean.php");
-                    }
-                    else
-                    {
-                        header("Location: update.php");
-                    }
-                }
-            }
-            else
-            {
-                die ("Error encountered: Tried opening world database: <b>`$worlddb`</b> in ".__FILE__." on line: ".__LINE__."<br>".mysql_error());
-                exit();
-            }
-        }
-        else
-        {
-            echo "Database connection could not be established, please check your configs";
-            exit();
-        }
-    }
-}
-else
-{
+    $settingsfile = "http://" . $_SERVER['HTTP_HOST'] . "/test/config.php";
+    $reading = @fopen($settingsfile, 'r');
+    if ($reading)
+        require "config.php";
     echo "<center>This will save your settings to a file for later usage.</center>";
+    if ($errors != 0)
+    {
+        if ($errors == 8)
+            echo "<center>You didn't fill in anything the last time.</center>";
+        else if ($errors >= 2)
+            echo "<center>You forgot to fill in a couple of fields.</center>";
+        else
+            echo "<center>You forgot to fill in one of the fields.</center>";
+    }
     ?>
     <html>
-    <body><br>
-    <center>
+    <body>
+    <center><br>
     <form name="input" action="<?php echo $PHP_SELF; ?>" method="post">
     <?php
     if ($set_host == "")
@@ -346,17 +296,17 @@ else
     }
     if ($realmddb == "")
     {?>
-         Realm Database name: <input type="text" name="realmddb" value="realmd"><br>
+        Realm Database name: <input type="text" name="realmddb" value="realmd"><br>
     <?php
     }?>
-    <input type="hidden" name="submitted2" value="1"><br>
+    <input type="hidden" name="submitted" value="1"><br>
     <input type="submit" value="Save" />
     </form>
     </center>
     </body>
     </html>
     <?php
-    if ($_REQUEST['submitted2'] == 1)
+    if ($_REQUEST['submitted'] == 1)
         WriteVars();
 }
 ob_end_clean;

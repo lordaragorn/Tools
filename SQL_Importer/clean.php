@@ -115,6 +115,7 @@ function ImportDB()
             {
                 echo $sql_line . '<br>';
                 echo "<br>";
+                $connect = mysql_select_db($targetdb);
                 $output = mysql_query($sql_line);
                 if ($output)
                 {
