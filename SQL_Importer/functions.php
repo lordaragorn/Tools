@@ -1,21 +1,29 @@
 <?php
 function ImportDB($dir)
 {
-    ini_set("memory_limit","750M");
+    ini_set("memory_limit","2048M");
+    set_time_limit(300);
     global $file_count;
     global $multi_query;
+    global $counter;
+    global $start_reading;
+    global $start_reading2;
+    $debug_mode = 0;
+    $re1='(\\()'; $re2='.*?'; $re3='(\\))'; $re4='(;)';
     $reading = fopen("config.php", 'r');
     if ($reading)
         require "config.php";
     else
         die("Config file not present.");
     $files = preg_find('/\.sql$/D', $dir, PREG_FIND_RECURSIVE);
-    $counter = 0;
     foreach($files as $file)
     {
-        $can_echo = 1;
+        $start_reading = 0;
+        $start_reading2 = 0;
         $counter = $counter + 1;
         $percentage = round($counter / $file_count * 100);
+        if ($percentage == 99)
+            $percentage = 100;
         if ($percentage == 100)
             $color = "#43CF24";
         else
@@ -35,30 +43,93 @@ function ImportDB($dir)
             $targetdb = "mysql";
         else
             die("<hr><br>Unknown file " . $file);
-        echo "<hr><br>File " . $file . ' containing query(s):<br><br>';
+        echo "<hr><br>File " . $file . '<br><br>';
         $file_content = file($file);
         foreach($file_content as $sql_line)
         {
             if(trim($sql_line) != "" && strpos($sql_line, "--") === false)
             {
-                $multi_query .= $sql_line;
+                if (preg_match("*LOCK TABLES*", $sql_line) || preg_match("*40000 ALTER TABLE*", $sql_line) || preg_match("*40103 SET*", $sql_line) || preg_match("*40014 SET*", $sql_line) || preg_match("*40101 SET*", $sql_line) || preg_match("*40111 SET*", $sql_line) || preg_match("*CREATE DATABASE*", $sql_line) || preg_match("*FOREIGN_KEY_CHECKS*", $sql_line) || preg_match("*MySQL Data Transfer*", $sql_line) || preg_match("*Source Server*", $sql_line) || preg_match("*Source Server Version*", $sql_line) || preg_match("*Source Host*", $sql_line) || preg_match("*Source Database*", $sql_line) || preg_match("*Target Server Type*", $sql_line) || preg_match("*Target Server Version*", $sql_line) || preg_match("*File Encoding*", $sql_line) || preg_match("*Date:*", $sql_line))
+                    continue;
+                else if (preg_match("*DROP TABLE IF EXISTS*", $sql_line))
+                {
+                    $database_create .= $sql_line;
+                    $start_reading = 1;
+                    if ($debug_mode == 1)
+                        echo "Drop table: <br><br>" . $sql_line . "<br><br>";
+                }
+                else if (preg_match("*charset*", $sql_line))
+                {
+                    $database_create .= $sql_line;
+                    $start_reading = 0;
+                    if ($debug_mode == 1)
+                        echo "Charset: <br><br>" . $sql_line . "<br><br>";
+                }
+                else if (preg_match("*INSERT INTO*", $sql_line) && preg_match_all ("/".$re1.$re2.$re3.$re4."/is", $sql_line, $matches))
+                {
+                    $multi_query .= $sql_line . "<br>";
+                    if ($debug_mode == 1)
+                        echo "Insert into: <br><br>" . $sql_line . "<br><br>";
+                }
+                else if (preg_match("*INSERT INTO*", $sql_line) && !preg_match_all ("/".$re1.$re2.$re3.$re4."/is", $sql_line, $matches))
+                {
+                    $multi_query .= $sql_line . "<br>";
+                    $start_reading = 0;
+                    $start_reading2 = 1;
+                    if ($debug_mode == 1)
+                        echo "Insert into bulk: <br><br>" . $sql_line . "<br><br>";
+                }
+                else if (preg_match_all ("/".$re1.$re2.$re3.$re4."/is", $sql_line, $matches) && !preg_match("*INSERT INTO*", $sql_line))
+                {
+                    $multi_query .= $sql_line . "<br>";
+                    $start_reading2 = 0;
+                    if ($debug_mode == 1)
+                        echo "End of bulk: <br><br>" . $sql_line . "<br><br>";
+                }
+                else if ($start_reading == 1 && $start_reading2 != 1)
+                    $database_create .= $sql_line;
+                else if ($start_reading2 == 1 && $start_reading != 1)
+                    $multi_query .= $sql_line . "<br>";
+                else if ($debug_mode == 1)
+                {
+                    echo "Reading1: " . $start_reading . "<br>";
+                    echo "Reading2: " . $start_reading2 . "<br>";
+                    $rest .= $sql_line . "<br>";
+                }
             }
         }
-        $multi_link = mysqli_connect($host, $name, $pass, $targetdb);
+        if ($rest != "" && $debug_mode == 1)
+            echo "Errors occured with unknown lines: <br>" . $rest . "<br>";
+        /*$multi_link = mysqli_connect($host, $name, $pass, $targetdb);
         if ($multi_link)
         {
+            if ($database_create != "")
+            {
+                $multi_result2 = mysqli_multi_query($multi_link, $database_create);
+                if (mysqli_error($multi_link) != 0)
+                    echo mysqli_error($multi_link);
+            }
             $multi_result = mysqli_multi_query($multi_link, $multi_query);
             if ($multi_result)
-                echo "succes";
-            else
+            {
+                if (mysqli_error($multi_link) != 0)
+                    echo mysqli_error($multi_link);
+            }
+            else if (mysqli_error($multi_link) != 0)
                 printf("Error: %d\n", mysqli_error($multi_link));
         }
         else
-            printf("Connect failed: %s\n", mysqli_connect_error());
+            printf("Connect failed: %s\n", mysqli_connect_error());*/
+        $database_create = "";
+        $rest = "";
         if (preg_match("*mangos*", $file))
+        {
+            //echo "Errors occured with unknown lines: <br>" . $rest . "<br>";
             echo $multi_query;
+            return;
+        }
         $multi_query = "";
-        mysqli_close($multi_link);
+        //mysqli_close($multi_link);
     }
 }
 Function preg_find($pattern, $start_dir='.', $args=NULL)
@@ -101,13 +172,25 @@ Function preg_find($pattern, $start_dir='.', $args=NULL)
                     if (isset($fileres['uid']) && function_exists('posix_getpwuid')) $fileres['owner'] = posix_getpwuid ($fileres['uid']);
                     $files_matched[$filepath] = $fileres;
                 }
-                else
+                else if (!preg_match("*0.10/*", $filepath) &&
+                !preg_match("*0.11/*", $filepath) &&
+                !preg_match("*0.12/*", $filepath) &&
+                !preg_match("*0.13/*", $filepath) &&
+                !preg_match("*0.14/*", $filepath) &&
+                !preg_match("*0.15/*", $filepath) &&
+                !preg_match("*0.16/*", $filepath) &&
+                !preg_match("*0.5/*", $filepath) &&
+                !preg_match("*0.6/*", $filepath) &&
+                !preg_match("*0.7/*", $filepath) &&
+                !preg_match("*0.8/*", $filepath) &&
+                !preg_match("*0.9/*", $filepath) &&
+                !preg_match("*pending review*", $filepath))
                     array_push($files_matched, $filepath);
             }
         }
         if( is_dir($filepath) && ($args & PREG_FIND_RECURSIVE) )
         {
-            if (!is_link($filepath) || ($args & PREG_FIND_FOLLOWSYMLINKS))
+            if (!is_link($filepath) || ($args & PREG_FIND_FOLLOWSYMLINKS) && !preg_match("*0.*", $filepath))
                 $files_matched = array_merge($files_matched, preg_find($pattern, $filepath, $args));
         }
     }
