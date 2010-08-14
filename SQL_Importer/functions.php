@@ -130,17 +130,13 @@ Function preg_find($pattern, $start_dir='.', $args=NULL)
     --$depth;
     return $files_matched;
 }
-function num_files($directory='.')
-{
-    return count(glob($directory."/*.sql"));
-}
 function WriteVars()
 {
     echo "getting here";
     $Pattern = '/\s*/m';
     $Replace = '';
     $settingsfile = "config.php";
-    $reading = fopen($settingsfile, 'r');
+    $reading = @fopen($settingsfile, 'r');
     if ($reading)
         require "config.php";
     if ($_POST["host"] != "" && $host == "")
@@ -183,8 +179,7 @@ function WriteVars()
         $set_realmddb = trim($_POST["realmddb"]);
         $set_realmddb = preg_replace($Pattern, $Replace, $set_realmddb);
     }
-    $newfile = "config.php";
-    $creation = fopen($newfile, 'w');
+    $creation = fopen("config.php", 'w');
     $stringData = "<?php\n";
     fwrite($creation, $stringData);
     //Host
@@ -234,7 +229,7 @@ function WriteVars()
         $stringData = '$scriptdev2db' . " = " . $scriptdev2db . ";\n";
     else
         $stringData = '$scriptdev2db' . " = " . $set_scriptdev2db . ";\n";
-    //Characteres
+    //Characters
     fwrite($creation, $stringData);
     if ($set_charactersdb == "" && $charactersdb == "")
         $stringData = '$charactersdb' . " = " . '""' . ";\n";
@@ -297,7 +292,7 @@ function WriteVars()
     $stringData = "?>";
     fwrite($creation, $stringData);
     fclose($creation);
-    $reading = @fopen($settingsfile, 'r');
+    $reading = fopen($settingsfile, 'r');
     if (!$reading)
         die ("Unexpected error during writing of the config file.");
     else
@@ -309,74 +304,168 @@ function ShowForm()
 {
     $settingsfile = "config.php";
     $reading = @fopen($settingsfile, 'r');
-    if ($reading)
-        require "config.php";
-    echo "<center>This will save your settings to a file for later usage.</center><br>";
-    if ($errors != 0)
-    {
-        if ($errors == 8)
-            echo "<center>You didn't fill in anything the last time.</center><br>";
-        else if ($errors >= 2)
-            echo "<center>You forgot to fill in a couple of fields.</center><br>";
-        else
-            echo "<center>You forgot to fill in one of the fields.</center><br>";
-    }
-    else
-        header("Location: index.php");
     ?>
-    <html>
-    <body>
-    <center><br>
-    <form name="input" action="<?php echo $PHP_SELF; ?>" method="post">
-    <?php
-    if ($host == "")
-    {?>
-        Host address: <input type="text" name="host" value="localhost"><br>
-    <?php
-    }
-    if ($port == "")
-    {?>
-        Mysql Port: <input type="text" name="port" value="3306"><br>
-    <?php
-    }
-    if ($name == "")
-    {?>
-        Mysql Username: <input type="text" name="name" value="root"><br>
-    <?php
-    }
-    if ($pass == "")
-    {?>
-        Mysql Password: <input type="text" name="pass" value="mangos"><br>
-    <?php
-    }
-    if ($worlddb == "")
-    {?>
-        World Database name: <input type="text" name="worlddb" value="mangos"><br>
-    <?php
-    }
-    if ($charactersdb == "")
-    {?>
-        Characters Database name: <input type="text" name="charactersdb" value="characters"><br>
-    <?php
-    }
-    if ($scriptdev2db == "")
-    {?>
-        ScriptDev2 Database name: <input type="text" name="scriptdev2db" value="scriptdev2"><br>
-    <?php
-    }
-    if ($realmddb == "")
-    {?>
-        Realm Database name: <input type="text" name="realmddb" value="realmd"><br>
-    <?php
-    }?>
-    <input type="hidden" name="submitted" value="1"><br>
-    <input type="submit" value="Save" />
-    </form>
-    </center>
-    </body>
-    </html>
+    <html><head><LINK REL=StyleSheet HREF="style.css" TYPE="text/css" MEDIA=screen>
+    <div id="wrapper">
+        <div id="header">
+        <?php
+        if ($reading)
+            require "config.php";
+        echo "<center>This will save your settings to a file for later usage.</center><br>";
+        if ($errors != 0 || $errors == "")
+        {
+            if ($errors == 8)
+                echo "<center>You didn't fill in anything the last time.</center><br>";
+            else if ($errors >= 2)
+                echo "<center>You forgot to fill in a couple of fields.</center><br>";
+            else if ($reading)
+                echo "<center>You forgot to fill in one of the fields.</center><br>";
+        }
+        else
+            header("Location: index.php");
+        ?>
+        </div>
+        <div id="main">
+            <form name="input" action="' . $PHP_SELF . 'method="post">
+                <table>
+                    <tr>
+                    <?php
+                    if ($host == "")
+                        echo '<td>Host address:</td>  <td><input type="text" name="host" value="localhost"></td>';
+
+                    echo "</tr><tr>";
+                    if ($port == "")
+                        echo '<td>Mysql Port:</td>  <td><input type="text" name="port" value="3306"></td>';
+
+                    echo "</tr><tr>";
+                    if ($name == "")
+                        echo '<td>Mysql Username:</td>  <td><input type="text" name="name" value="root"></td>';
+
+                    echo "</tr><tr>";
+                    if ($pass == "")
+                        echo '<td>Mysql Password:</td>  <td><input type="text" name="pass" value="mangos"></td>';
+
+                    echo "</tr><tr>";
+                    if ($worlddb == "")
+                        echo '<td>World Database name:</td>  <td><input type="text" name="worlddb" value="mangos"></td>';
+
+                    echo "</tr><tr>";
+                    if ($charactersdb == "")
+                        echo '<td>Characters Database name:</td>  <td><input type="text" name="charactersdb" value="characters"></td>';
+
+                    echo "</tr><tr>";
+                    if ($scriptdev2db == "")
+                        echo '<td>ScriptDev2 Database name:</td>  <td><input type="text" name="scriptdev2db" value="scriptdev2"></td>';
+
+                    echo "</tr><tr>";
+                    if ($realmddb == "")
+                        echo '<td>Realm Database name:</td>  <td><input type="text" name="realmddb" value="realmd"></td>';
+                    ?>
+                    </tr>
+                </table>
+                <br>
+                <input type="hidden" name="submitted" value="1">
+                <input type="submit" value="Save">
+            </form>
+        </div>
+    </div>
     <?php
     if ($_REQUEST['submitted'] == 1)
         WriteVars();
+}
+Function CheckConnect()
+{
+    require "config.php";
+    global $can_import;
+    $can_import = 0;
+    $connect_realmddb = mysql_select_db($realmddb);
+    $connect_worlddb = mysql_select_db($worlddb);
+    $connect_charactersdb = mysql_select_db($charactersdb);
+    $connect_scriptdev2db = mysql_select_db($scriptdev2db);
+    if ($connect_realmddb)
+        $can_import = $can_import + 1;
+    else
+    {
+        if ($realmddb == "")
+            die("The config for the realm database is empty.");
+        else
+        {
+            $create_db = mysql_query("CREATE DATABASE IF NOT EXISTS $realmddb DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
+            if (!$create_db)
+                echo "Failed to create database " . $realmddb . " because of:<br>" . mysql_error($link) . ".\n<br><br><br>";
+        }
+    }
+    if ($connect_worlddb)
+        $can_import = $can_import + 1;
+    else
+    {
+        if ($worlddb == "")
+            die("The config for the world database is empty.");
+        else
+        {
+            $create_db = mysql_query("CREATE DATABASE IF NOT EXISTS $worlddb DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
+            if (!$create_db)
+                echo "Failed to create database " . $realmddb . " because of:<br>" . mysql_error($link) . ".\n<br><br><br>";
+        }
+    }
+    if ($connect_scriptdev2db)
+        $can_import = $can_import + 1;
+    else
+    {
+        if ($scriptdev2db == "")
+            die("The config for the scriptdev2 database is empty.");
+        else
+        {
+            $create_db = mysql_query("CREATE DATABASE IF NOT EXISTS $scriptdev2db DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
+            if (!$create_db)
+                echo "Failed to create database " . $realmddb . " because of:<br>" . mysql_error($link) . ".\n<br><br><br>";
+        }
+    }
+    if ($connect_charactersdb)
+        $can_import = $can_import + 1;
+    else
+    {
+        if ($charactersdb == "")
+            die("The config for the characters database is empty.");
+        else
+        {
+            $create_db = mysql_query("CREATE DATABASE IF NOT EXISTS $charactersdb DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;");
+            if (!$create_db)
+                echo "Failed to create database " . $realmddb . " because of:<br>" . mysql_error($link) . ".\n<br><br><br>";
+        }
+    }
+    //header("Location: index.php");
+}
+function count_files_recursive($path)
+{
+    $files = 0;
+    $dir = opendir($path);
+    if (!$dir)
+        return 0;
+    while (($file = readdir($dir)) !== false)
+    {
+        if ($file[0] == '.')
+            continue;
+
+        if (is_dir($path.$file))
+            $files += count_files_recursive($path.$file.DIRECTORY_SEPARATOR);
+        else if (!preg_match("*updates0.10*", $path.$file.DIRECTORY_SEPARATOR) &&
+                 !preg_match("*updates0.11*", $path.$file.DIRECTORY_SEPARATOR) &&
+                 !preg_match("*updates0.12*", $path.$file.DIRECTORY_SEPARATOR) &&
+                 !preg_match("*updates0.13*", $path.$file.DIRECTORY_SEPARATOR) &&
+                 !preg_match("*updates0.14*", $path.$file.DIRECTORY_SEPARATOR) &&
+                 !preg_match("*updates0.15*", $path.$file.DIRECTORY_SEPARATOR) &&
+                 !preg_match("*updates0.16*", $path.$file.DIRECTORY_SEPARATOR) &&
+                 !preg_match("*updates0.5*", $path.$file.DIRECTORY_SEPARATOR) &&
+                 !preg_match("*updates0.6*", $path.$file.DIRECTORY_SEPARATOR) &&
+                 !preg_match("*updates0.7*", $path.$file.DIRECTORY_SEPARATOR) &&
+                 !preg_match("*updates0.8*", $path.$file.DIRECTORY_SEPARATOR) &&
+                 !preg_match("*updates0.9*", $path.$file.DIRECTORY_SEPARATOR) &&
+                 !preg_match("*pending review*", $path.$file.DIRECTORY_SEPARATOR) &&
+                  preg_match("*.sql*", $file))
+            $files++;
+    }    
+    closedir($dir);
+    return $files;
 }
 ?>
